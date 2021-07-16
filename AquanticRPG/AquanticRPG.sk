@@ -1,0 +1,83 @@
+#variables:
+
+options:
+ # Verzió | Definíció -> (X = Főverzió)(Z = Bug fix)(Y = Alpha - 1, Beta - 2, Release - 3) - X.Y.Z = 0.1.2
+    pluginversion: 0.0.1
+ # Help messages
+    help_header: &8&l=====&r&7  Aquantic RPG&8&l  =====
+    help_footer: &8&l======================
+    noarg: Nincs megadva argumentum! A helyes használathoz írd be a &e/rpg help &7parancsot!
+ # Permissions
+    permission1: &3Aquantic &8» &7Nincs engedélyed a parancs használatához!
+ # Prefixes
+    aquantic: &3Aquantic &8» &7
+ # Alapvető options
+    skrl: aquanticskripts.aqrpg.reloadskript
+    hashtag: ##
+
+
+command /rpg [<text>] [<number>]:
+    permission: aquanticskripts.aqrpg
+    permission message: {@permission1}
+    trigger:
+    # Alapvető parancsok
+        if arg-1 is not set:
+            send "{@aquantic}{@noarg}" to player
+        if player has permission "{@skrl}":
+            if arg-1 is "reload":
+                make console execute command "sk reload AqRPG"
+                make console execute command "sk reload AqRPG"
+                send "{@aquantic}Skript sikeresen frissítve! &8&o(Hibák előfordulhatnak!)"
+    # Help parancs
+        if arg-1 is set:
+            if arg-1 is "help":
+                if arg-2 is not set:
+                    send "{@aquantic}Hiányzó argumentum! A megfelelő használathoz írd be, hogy &e/rpg help <oldalszám>" to player
+                if arg-2 is 1:
+                    send "" to player
+                    send "{@help_header}" to player
+                    send "" to player
+                    send "&e/rpg help &8&l|&r &7Segítség kiírása" to player
+                    send "&e/rpg check &8&l|&r &7Verzió ellenörzése&7" to player
+                    send "&e/rpg update &8&l|&r &7Plugin frissítése, ha az elérhető&7" to player
+                    send "" to player
+                    send "&7Oldal: 1/3" to player
+                    send "" to player
+                    send "&8Készítette: nermanx" to player
+                    send "&8Készítő Discord profilja: nerman{@hashtag}0001" to player
+                    send "&8Verzió: {@pluginversion}" to player
+                    send "&8/rpg check &l| &r&8Frissítés ellenőrzése" to player
+                    send "{@help_footer}" to player
+
+                if arg-2 is 2:
+                    send "" to player 
+                    send "{@help_header}" to player
+                    send "" to player 
+                    send "&e/rpg xxx &8&l|&r &7xxx" to player
+                    send "&e/rpg xxx &8&l|&r &7xxx" to player
+                    send "&e/rpg xxx &8&l|&r &7xxx" to player
+                    send "" to player
+                    send "&7Oldal: 2/3" to player
+                    send "&8Verzió: {@pluginversion}" to player
+                    send "&8/rpg check &l| &r&8Frissítés ellenőrzése" to player
+                    send "{@help_footer}" to player
+
+                if arg-2 is 3:
+                    send "" to player
+                    send "{@help_header}" to player
+                    send "" to player
+                    send "&e/rpg xxx &8&l|&r &7xxx" to player
+                    send "&e/rpg xxx &8&l|&r &7xxx" to player
+                    send "&e/rpg xxx &8&l|&r &7xxx" to player
+                    send "" to player
+                    send "&7Oldal: 3/3" to player
+                    send "&8Verzió: {@pluginversion}" to player
+                    send "&8/rpg check &l| &r&8Frissítés ellenőrzése" to player
+                    send "{@help_footer}" to player
+
+            if arg-1 is "check":
+                set {_version} to line 1 from url "https://raw.githubusercontent.com/NermanYT/AquanticSkripts/main/AquanticRPG/version"
+                if {_version} is not {@pluginversion}:
+                    send "{@aquantic}Régi verzió! Kérlek frissítsd naprakészre ezen a linken keresztül: https://"
+                else:
+                    send "{@aquantic}Jelenleg naprakész verziót használod!" to player
